@@ -5,22 +5,23 @@ import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.NonNull;
 import ride.sharing.geektrust.entities.Rider;
+import ride.sharing.geektrust.exceptions.BadRequestException;
 
 @AllArgsConstructor
 public class RiderRepo {
     
     private final Map<String, Rider> riderMap;
 
-    public Rider getRider(@NonNull String id){
+    public Rider getRider(@NonNull String id) throws BadRequestException{
         if(riderMap.containsKey(id)){
             return riderMap.get(id);
         }
-        throw new Error("Rider doesn't exists!!");
+        throw new BadRequestException("Rider doesn't exists!!");
     }
 
-    public void addRider(@NonNull Rider rider){
+    public void addRider(@NonNull Rider rider) throws BadRequestException{
         if(riderMap.containsKey(rider.getId())){
-            throw new Error("Rider Already Exists!!");
+            throw new BadRequestException("Rider Already Exists!!");
         }
         riderMap.put(rider.getId(), rider);
     }

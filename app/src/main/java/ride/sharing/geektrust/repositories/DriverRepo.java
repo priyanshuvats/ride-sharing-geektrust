@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.NonNull;
 import ride.sharing.geektrust.dto.Coordinates;
 import ride.sharing.geektrust.entities.Driver;
+import ride.sharing.geektrust.exceptions.BadRequestException;
 import ride.sharing.geektrust.utils.DistanceUtil;
 
 @AllArgsConstructor
@@ -15,11 +16,11 @@ public class DriverRepo {
     
     private final Map<String, Driver> driverMap;
    
-    public Driver getDriver(@NonNull String id){
+    public Driver getDriver(@NonNull String id) throws BadRequestException{
         if(driverMap.containsKey(id)){
             return driverMap.get(id);
         }
-        throw new Error("Driver doesn't exist!!");
+        throw new BadRequestException("Driver doesn't exist!!");
     }
 
     public List<Driver> getDrivers(Coordinates leftBound, Coordinates rightBound,
@@ -36,9 +37,9 @@ public class DriverRepo {
         return drivers;
     }
 
-    public void addDriver(@NonNull Driver driver){
+    public void addDriver(@NonNull Driver driver) throws BadRequestException{
         if(driverMap.containsKey(driver.getId())){
-            throw new Error("Driver Already Exists!!");
+            throw new BadRequestException("Driver Already Exists!!");
         }
         driverMap.put(driver.getId(), driver);
     }

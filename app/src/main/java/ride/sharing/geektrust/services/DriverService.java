@@ -9,6 +9,8 @@ import lombok.AllArgsConstructor;
 import lombok.NonNull;
 import ride.sharing.geektrust.dto.Coordinates;
 import ride.sharing.geektrust.entities.Driver;
+import ride.sharing.geektrust.exceptions.BadRequestException;
+import ride.sharing.geektrust.exceptions.DriverAlreadyBookedException;
 import ride.sharing.geektrust.repositories.DriverRepo;
 import ride.sharing.geektrust.utils.DistanceUtil;
 
@@ -17,9 +19,19 @@ public class DriverService {
 
     DriverRepo driverRepo;
 
-    public void addDriver(@NonNull String id, int xc, int yc){
+    public void addDriver(@NonNull String id, int xc, int yc) throws BadRequestException{
         Driver driver = new Driver(id, new Coordinates(xc, yc));
         driverRepo.addDriver(driver);
+    }
+
+    public void bookDriver(@NonNull String id) throws DriverAlreadyBookedException, BadRequestException{
+        Driver driver = driverRepo.getDriver(id);
+        driver.book();
+    }
+
+    public void endBooking(@NonNull String id) throws BadRequestException{
+        Driver driver = driverRepo.getDriver(id);
+        driver.setBooked(false);
     }
 
     public List<Driver> getInRadiusDrivers(Coordinates c, int radius, 

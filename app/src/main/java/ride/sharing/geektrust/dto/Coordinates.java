@@ -10,4 +10,8 @@ import lombok.Setter;
 public class Coordinates {
     private int x;
     private int y;
+
+    public Coordinates clone(){
+        return new Coordinates(this.x, this.y);
+    }
 }

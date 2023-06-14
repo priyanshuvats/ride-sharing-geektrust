@@ -13,7 +13,7 @@ import ride.sharing.geektrust.utils.DistanceUtil;
 @AllArgsConstructor
 public class DriverRepo {
     
-    Map<String, Driver> driverMap;
+    private final Map<String, Driver> driverMap;
    
     public Driver getDriver(@NonNull String id){
         if(driverMap.containsKey(id)){

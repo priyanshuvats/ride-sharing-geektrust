@@ -9,7 +9,7 @@ import ride.sharing.geektrust.entities.Rider;
 @AllArgsConstructor
 public class RiderRepo {
     
-    Map<String, Rider> riderMap;
+    private final Map<String, Rider> riderMap;
 
     public Rider getRider(@NonNull String id){
         if(riderMap.containsKey(id)){

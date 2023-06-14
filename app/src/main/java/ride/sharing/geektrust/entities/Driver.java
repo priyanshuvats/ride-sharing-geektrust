@@ -2,18 +2,17 @@ package ride.sharing.geektrust.entities;
 
 import lombok.Getter;
 import lombok.Setter;
+import ride.sharing.geektrust.dto.Coordinates;
 
 @Getter
 @Setter
 public class Driver {
     private final String id;
     private boolean isBooked = false;
-    private int xc;
-    private int yc;
+    private Coordinates coordinates;
 
-    public Driver(String id, int xc, int yc) {
+    public Driver(String id, Coordinates coordinates) {
         this.id = id;
-        this.xc = xc;
-        this.yc = yc;
+        this.coordinates = coordinates;
     }
 }

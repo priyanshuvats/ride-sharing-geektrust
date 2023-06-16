@@ -13,8 +13,8 @@ public class Ride {
     private final String id;
     private final Rider rider;
     private final Driver driver;
-    private Coordinates sourceCoordinates;
-    private Coordinates destinatioCoordinates;
+    private final Coordinates sourceCoordinates;
+    private Coordinates destinationCoordinates;
     private boolean hasEnded = false;
     private int duration;
 
@@ -22,6 +22,6 @@ public class Ride {
         if(this.hasEnded){
             throw new RideAlreadyEndedException("Ride already ended!!");
         }
-        this.hasEnded = false;
+        this.hasEnded = true;
     }
 }

@@ -1,12 +1,14 @@
 package ride.sharing.geektrust.exceptions;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 @AllArgsConstructor
+@Getter
 public class RideAlreadyEndedException extends Exception {
-    private String message;
+    private String Message;
 
     public String toString(){
-        return message;
+        return Message;
     }
 }

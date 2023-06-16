@@ -5,6 +5,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import lombok.AllArgsConstructor;
 import lombok.NonNull;
 import ride.sharing.geektrust.dto.Coordinates;
@@ -15,8 +18,10 @@ import ride.sharing.geektrust.repositories.DriverRepo;
 import ride.sharing.geektrust.utils.DistanceUtil;
 
 @AllArgsConstructor
+@Service
 public class DriverService {
 
+    @Autowired
     DriverRepo driverRepo;
 
     public void addDriver(@NonNull String id, int xc, int yc) throws BadRequestException{
@@ -44,7 +49,8 @@ public class DriverService {
         while(inRadiusDrivers.size()<limit && i<drivers.size()){
             Driver driver = drivers.get(i);
             double dist = DistanceUtil.calculateDistance(c, driver.getCoordinates());
-            if(dist<5){inRadiusDrivers.add(driver);}
+            if(dist<=radius){inRadiusDrivers.add(driver);}
+            i++;
         }
         Collections.sort(inRadiusDrivers, new DistanceComparator(c));
         return inRadiusDrivers;

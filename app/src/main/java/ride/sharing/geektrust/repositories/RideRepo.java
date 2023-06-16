@@ -2,12 +2,15 @@ package ride.sharing.geektrust.repositories;
 
 import java.util.Map;
 
+import org.springframework.stereotype.Repository;
+
 import lombok.AllArgsConstructor;
 import lombok.NonNull;
 import ride.sharing.geektrust.entities.Ride;
 import ride.sharing.geektrust.exceptions.BadRequestException;
 
 @AllArgsConstructor
+@Repository
 public class RideRepo {
     
     private final Map<String, Ride> rideMap;
@@ -23,7 +26,7 @@ public class RideRepo {
         if(rideMap.containsKey(id)){
             return rideMap.get(id);
         }
-        throw new BadRequestException("RideId doesn't exists!!");
+        throw new BadRequestException("INVALID_RIDE");
     }
 
 }

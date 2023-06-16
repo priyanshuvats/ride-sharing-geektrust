@@ -3,12 +3,43 @@
  */
 package ride.sharing.geektrust;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.Arrays;
+import java.util.List;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import ride.sharing.geektrust.commands.CommandInvoker;
+import ride.sharing.geektrust.configs.ApplicationConfig;
+
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
 
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        List<String> commandLineArgs = Arrays.asList(args);
+        run(commandLineArgs);
+    }
+
+    private static void run(List<String> args){
+        ApplicationContext context = new AnnotationConfigApplicationContext(ApplicationConfig.class);
+        ApplicationConfig appConfig = new ApplicationConfig();
+        appConfig.addCommands(context);
+        CommandInvoker commandInvoker = appConfig.getCommandInvoker();
+        BufferedReader reader;
+        String inputFile = args.get(0);
+        try {
+            reader = new BufferedReader(new FileReader(inputFile));
+            String line = reader.readLine();
+            while(line!=null){
+                List<String> tokens = Arrays.asList(line.split(" "));
+                commandInvoker.executeCommand(tokens.get(0), tokens);
+                line = reader.readLine();
+            }
+            reader.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
     }
 }

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.stereotype.Repository;
+
 import lombok.AllArgsConstructor;
 import lombok.NonNull;
 import ride.sharing.geektrust.dto.Coordinates;
@@ -12,6 +14,7 @@ import ride.sharing.geektrust.exceptions.BadRequestException;
 import ride.sharing.geektrust.utils.DistanceUtil;
 
 @AllArgsConstructor
+@Repository
 public class DriverRepo {
     
     private final Map<String, Driver> driverMap;

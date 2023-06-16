@@ -2,12 +2,15 @@ package ride.sharing.geektrust.repositories;
 
 import java.util.Map;
 
+import org.springframework.stereotype.Repository;
+
 import lombok.AllArgsConstructor;
 import lombok.NonNull;
 import ride.sharing.geektrust.entities.Rider;
 import ride.sharing.geektrust.exceptions.BadRequestException;
 
 @AllArgsConstructor
+@Repository
 public class RiderRepo {
     
     private final Map<String, Rider> riderMap;

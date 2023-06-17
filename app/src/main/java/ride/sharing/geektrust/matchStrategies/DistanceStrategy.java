@@ -28,7 +28,7 @@ public class DistanceStrategy implements IMatchStrategy{
         int radius = AppConstants.DRIVER_MATCH_DEFAULT_RADIUS;
         int limit = AppConstants.MATCHED_DRIVER_COUNT_UPPER_LIMIT;
         List<Driver> matchedDrivers = 
-        driverService.getInRadiusDrivers(rider.getCoordinates(), radius, false, limit);
+        driverService.getInRadiusDrivers(rider.getCoordinates(), radius, true, limit);
         return matchedDrivers;
     }
     

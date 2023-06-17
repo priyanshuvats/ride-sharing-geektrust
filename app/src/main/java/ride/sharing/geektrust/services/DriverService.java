@@ -46,14 +46,14 @@ public class DriverService {
         List<Driver> drivers = driverRepo.getDrivers(leftBound, rightBound, excludeBooked);
         List<Driver> inRadiusDrivers = new ArrayList<>();
         int i=0;
-        while(inRadiusDrivers.size()<limit && i<drivers.size()){
+        while(i<drivers.size()){
             Driver driver = drivers.get(i);
             double dist = DistanceUtil.calculateDistance(c, driver.getCoordinates());
             if(dist<=radius){inRadiusDrivers.add(driver);}
             i++;
         }
         Collections.sort(inRadiusDrivers, new DistanceComparator(c));
-        return inRadiusDrivers;
+        return inRadiusDrivers.subList(0, Math.min(limit, inRadiusDrivers.size()));
     }
 
     @AllArgsConstructor

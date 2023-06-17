@@ -30,10 +30,10 @@ public class RideFacade {
 
     public void startRide(String rideId, int driverIndex, String riderId) throws InvalidRideException{
         List<Driver> matchedDrivers = matchService.getMatchedDrivers(riderId);
-        if(matchedDrivers.size() < driverIndex || matchedDrivers.get(driverIndex).isBooked()){
+        if(matchedDrivers.size() < driverIndex || matchedDrivers.get(driverIndex-1).isBooked()){
             throw new InvalidRideException("INVALID_RIDE");
         }
-        Driver driver = matchedDrivers.get(driverIndex);
+        Driver driver = matchedDrivers.get(driverIndex-1);
         try {
             Rider rider = riderService.getRider(riderId);
             driverService.bookDriver(driver.getId());

@@ -15,7 +15,7 @@ public class Bill {
     @Override
     public String toString() {
         DecimalFormat df = AppConstants.BILL_DECIMAL_FORMAT;
-        return "Bill " + rideId + " " + driverId + " " + df.format(amount);
+        return "BILL " + rideId + " " + driverId + " " + df.format(amount);
     }
     
 }

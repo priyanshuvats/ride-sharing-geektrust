@@ -60,8 +60,11 @@ public class DriverService {
     private class DistanceComparator implements Comparator<Driver>{
         private Coordinates c;
         public int compare(Driver d1, Driver d2){
-            return (int)(DistanceUtil.calculateDistance(c, d1.getCoordinates()) - 
+            double diff = (DistanceUtil.calculateDistance(c, d1.getCoordinates()) - 
                     DistanceUtil.calculateDistance(c, d2.getCoordinates()));
+            if(diff<0){return -1;}
+            if(diff>0){return 1;}
+            return 0;
         }
     }
 }

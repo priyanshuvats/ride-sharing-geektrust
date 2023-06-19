@@ -17,6 +17,7 @@ import ride.sharing.geektrust.configs.ApplicationConfig;
 public class App {
 
     public static void main(String[] args) {
+        args = new String[]{"src/main/resources/input1.txt"};
         List<String> commandLineArgs = Arrays.asList(args);
         run(commandLineArgs);
     }
